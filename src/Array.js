@@ -11,6 +11,7 @@ function extend (Y) {
       this.eventHandler = new Y.utils.EventHandler(ops => {
         var userEvents = []
         ops.forEach(op => {
+          var valueId = JSON.stringify(op.id)
           if (op.struct === 'Insert') {
             let pos
             // we check op.left only!,
@@ -59,7 +60,7 @@ function extend (Y) {
               object: this,
               index: pos,
               values: values,
-              // valueId: valueId, // TODO: does this still work as expected?
+              valueId: valueId,
               length: length
             })
           } else if (op.struct === 'Delete') {
@@ -76,6 +77,7 @@ function extend (Y) {
                 object: this,
                 index: pos,
                 values: values,
+                valueId: valueId,
                 _content: content,
                 length: op.length || 1
               })
